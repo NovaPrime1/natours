@@ -15,7 +15,7 @@ const handleJWTExpiredError = () =>
 const handleDuplicateFieldDB = err => {
   // console.log('Inside of the handler for duplicate fields');
   // const value = err.message.match(/(["'])(\\?.)*?\1/)[0]; -- In a different field.
-  console.log(err.keyValue.name);
+  // console.log(err.keyValue.name);
   const value = err.keyValue.name;
   const message = `Duplicate field value: ${value}. Please use another value`;
   return new AppError(message, 400);
@@ -23,9 +23,9 @@ const handleDuplicateFieldDB = err => {
 
 const handleValidationDB = err => {
   // This is going to loop through the elements in the array of items
-  console.log('Inside of the handler for fields validation');
+  // console.log('Inside of the handler for fields validation');
   const errors = Object.values(err.errors).map(el => el.message);
-  console.log('Inside of the handler for fields validation after loop');
+  // console.log('Inside of the handler for fields validation after loop');
 
   const message = `Invalid input data. ${errors.join('. ')}`;
   return new AppError(message, 400);
@@ -42,7 +42,7 @@ const sendErrorDev = (err, req, res) => {
     });
   } else {
     // RENDERED WEBSITES
-    console.error('ERROR *', err);
+    // console.error('ERROR *', err);
     res.status(err.statusCode).render('error', {
       title: 'Something went wrong!',
       msg: err.message
@@ -62,7 +62,7 @@ const sendErrorProd = (err, req, res) => {
     }
     //Programming or other error: don't want to leak error or details to client
     //1) log error
-    console.error('ERROR *', err); // why logging error twice
+    // console.error('ERROR *', err); // why logging error twice
 
     //2) Send generated message
     res.status(500).json({
@@ -82,7 +82,7 @@ const sendErrorProd = (err, req, res) => {
 
   // B) Programming or other unknow error: don't leak error details
   // 1) Log error
-  console.error('ERROR *', err);
+  // console.error('ERROR *', err);
 
   // 2) Send generic message
   return res.status(err.statusCode).render('error', {
@@ -107,7 +107,7 @@ module.exports = (err, req, res, next) => {
     // console.log(' Inside the prod switch for castError');
     if (err.name === 'CastError') error = handleCastErrorDB(error);
 
-    console.log(err.code);
+    // console.log(err.code);
     if (err.code === 11000) error = handleDuplicateFieldDB(error);
     // if (error) error = handleCastErrorDB(error);
     // console.log(err);

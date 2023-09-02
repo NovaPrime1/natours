@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 // Here you are mouting the routes to the components. See below in Routes
 const AppError = require('./utils/appError');
@@ -18,7 +19,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
-// Start express app 
+// Start express app
 const app = express();
 
 // For the pug template Engine
@@ -110,6 +111,9 @@ app.use(
     ]
   })
 );
+
+// Addd compression
+app.use(compression());
 
 // app.use((req, res, next) => {
 //   console.log('Hello from the middleware 👋');

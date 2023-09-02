@@ -65,7 +65,7 @@ exports.resizeTourImage = catchAsync(async (req, res, next) => {
   );
 
   // This will log the body to the console.
-  console.log(req.body);
+  // console.log(req.body);
   next();
 });
 

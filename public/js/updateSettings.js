@@ -9,8 +9,8 @@ export const updateSettings = async (data, type) => {
   try {
     const url =
       type === 'password'
-        ? 'http://localhost:3000/api/V1/users/updateMyPassword'
-        : 'http://localhost:3000/api/V1/users/updateMe';
+        ? '/api/V1/users/updateMyPassword'
+        : '/api/V1/users/updateMe';
 
     // Ajax request to the server.
     const res = await axios({

@@ -50,7 +50,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
   const url = `http://localhost:3000/me`;
   // const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
+  // console.log(url);
   await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
 });
@@ -58,7 +58,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  console.log(' We are in the login module in the authController');
+  // console.log(' We are in the login module in the authController');
 
   //1) check email and password exist
   if (!email || !password) {
@@ -72,7 +72,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email for password', 401));
   }
 
-  console.log(user);
+  // console.log(user);
 
   //3) if everything is ok send the token back to the client
 
@@ -140,18 +140,18 @@ exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {
       // Verify tokent
-      console.log(' Inside the if state to check for jwt cookie');
+      // console.log(' Inside the if state to check for jwt cookie');
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,
         process.env.JWT_SECRET
       );
 
       // 2) Check if the user still exists- No one change the webtoken
-      console.log(' Checking for current user');
+      // console.log(' Checking for current user');
       const currentUser = await User.findById(decoded.id);
 
       if (!currentUser) {
-        console.log(' Inside the !currentUser if statement');
+        // console.log(' Inside the !currentUser if statement');
         return next();
       }
 
@@ -164,12 +164,12 @@ exports.isLoggedIn = async (req, res, next) => {
       // this will allow pug to use this variable inside a template  |res.locals.user mean "user" can be used in template.
       // req.user = currentUser; - put the current user on response.locals
       // Two next() are used so the next middleware can be called in both cases.
-      console.log(
-        ' Directly before we expose the user var to the pug templates'
-      );
+      // console.log(
+      //   ' Directly before we expose the user var to the pug templates'
+      // );
       res.locals.user = currentUser;
-      console.log(
-        ' Directly after we expose the user var to the pug templates'
+      // console.log(
+      //   ' Directly after we expose the user var to the pug templates'
       );
       return next();
     } catch (err) {
@@ -297,7 +297,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
 
   //const user = await User.findById(req.user.id).select('+password'); -- Jonas way..
-  console.log(user);
+  // console.log(user);
 
   // 2) Check if POSTed password is correct - requirements
   // console.log('This is the first:' + req.body.password);

@@ -7,7 +7,7 @@ const factory = require('./handlerFactory');
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   //1) Get the currently booked tour
   const tour = await Tour.findById(req.params.tourId);
-  console.log(tour);
+  // console.log(tour);
 
   //2) Create the checkout session. Below is the information about the session. API call which is an async function which we should await.
   const session = await stripe.checkout.sessions.create({

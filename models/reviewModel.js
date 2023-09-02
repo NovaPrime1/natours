@@ -116,7 +116,7 @@ reviewSchema.post('save', function(next) {
 reviewSchema.pre(/^findOneAnd/, async function(next) {
   //this key is for the current document
   this.r = await this.findOne();
-  console.log(this.r);
+  // console.log(this.r);
   next();
 });
 

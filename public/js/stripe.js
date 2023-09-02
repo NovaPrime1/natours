@@ -30,9 +30,7 @@ export const bookTour = async tourId => {
     //This id is from the index.js bookTour and this should return a check out session.
     // console.log(' Inside the axios call for bookTour');
 
-    const session = await axios(
-      `http://localhost:3000/api/V1/bookings/checkout-session/${tourId}`
-    );
+    const session = await axios(`/api/V1/bookings/checkout-session/${tourId}`);
 
     // Get session from AJAX calll then call the backend bookingController method, remember to import the controler and pass in parm
 
