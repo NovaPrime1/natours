@@ -62,7 +62,7 @@ const sendErrorProd = (err, req, res) => {
     }
     //Programming or other error: don't want to leak error or details to client
     //1) log error
-    // console.error('ERROR *', err); // why logging error twice
+    console.error('ERROR *', err); // why logging error twice
 
     //2) Send generated message
     res.status(500).json({
