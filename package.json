@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Learning node, express and mongoDB",
   "engines": {
-    "node": "^18.21.1 "
+    "node": "^18.17.1 "
   },
   "main": "app.js",
   "scripts": {
